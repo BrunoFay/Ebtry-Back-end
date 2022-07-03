@@ -1,8 +1,8 @@
 import * as bcrypt from 'bcryptjs';
 import { JwtPayload } from 'jsonwebtoken';
-import { User } from '../types/user';
+import { User } from '../types/login';
 import { LoginInfos, LoginModel } from '../types/login';
-import { createToken, validadeToken } from '../helpers/token';
+import { createToken, validateToken } from '../helpers/tokenFunctions';
 
 class LoginService {
   loginModel: LoginModel;
@@ -25,15 +25,7 @@ class LoginService {
     const validatePassword = await bcrypt.compare(password, userResult.password!);
     if (!validatePassword) return { errorStatus: 401, message: 'Incorrect email or password' };
     this.createToken(loginInfos);
-    return {
-      user: {
-        id: userResult.id,
-        username: userResult.username,
-        role: userResult.role,
-        email: userResult.email,
-      },
-      token: this.token,
-    };
+    return { token: this.token };
   }
 
   createToken(data: LoginInfos) {
@@ -41,13 +33,9 @@ class LoginService {
   }
 
   validateToken(token: string) {
-    this.isTokenValid = validadeToken(token);
+    this.isTokenValid = validateToken(token);
     return this.isTokenValid;
   }
 
-  async getRole(email: string) {
-    const user = await this.getUserByEmail(email);
-    return user.role;
-  }
 }
 export default LoginService;

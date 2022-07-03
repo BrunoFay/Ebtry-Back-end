@@ -21,3 +21,11 @@ export type Task = {
   createdBy: string;
   priority:Priority;
 }
+
+export type TaskService ={
+  getAll: () => Promise<Task[]>;
+  getTaskById: (id:string) => Promise<Task>;
+  create: (task: Task) => Promise<Task>;
+  update: (id: string, task: Partial<Task>) => Promise<void>;
+  delete: (id: string) => Promise<void>;
+}

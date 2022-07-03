@@ -28,8 +28,7 @@ class LoginController {
       }
       const isValidToken = this.service.validateToken(authorization);
       const { email } = isValidToken as { email: string };
-      const userRole = await this.service.getRole(email);
-      return res.status(200).json(userRole);
+      return res.status(200).json({ email });
     } catch (error) {
       next(error);
     }
