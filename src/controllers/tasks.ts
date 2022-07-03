@@ -1,9 +1,9 @@
 import { RequestHandler } from 'express';
-import { TaskService } from '../types/tasks';
+import { Service } from '../services';
+import { Task } from '../types/tasks';
 
-class TasksController  {
-  constructor(private taskService: TaskService = taskService) { }
-
+class TasksController {
+  constructor(private taskService: Service<Task> = taskService) { }
   getAll: RequestHandler = async (req, res, next) => {
     try {
       const tasks = await this.taskService.getAll();
@@ -25,7 +25,7 @@ class TasksController  {
   update: RequestHandler = async (req, res, next) => {
     try {
       const { id } = req.params;
-      const isValidId = await this.taskService.getTaskById(id);
+      const isValidId = await this.taskService.getById(id);
       if (!isValidId) return res.status(404).json({ error: 'Task not found' });
       await this.taskService.update(id, req.body);
       return res.status(200).json({ message: 'Finished' });
@@ -37,7 +37,7 @@ class TasksController  {
   delete: RequestHandler = async (req, res, next) => {
     try {
       const { id } = req.params;
-      const isValidId = await this.taskService.getTaskById(id);
+      const isValidId = await this.taskService.getById(id);
       if (!isValidId) return res.status(404).json({ error: 'Task not found' });
       await this.taskService.delete(id);
       return res.status(200).json({ message: 'Finished' });

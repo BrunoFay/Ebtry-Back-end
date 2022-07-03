@@ -1,12 +1,12 @@
 import { Router } from 'express';
-/* import Users from '../database/models/Users'; */
 import LoginService from '../services/login';
 import LoginController from '../controllers/login';
 import LoginMiddleware from '../middlewares/loginValidate';
-import { LoginModel } from '../types/login';
+import LoginModel  from '../models/users';
+import { LoginModelType } from '../types/login';
 
 const LoginRouter = Router();
-/* const Model = Users as LoginModel; */
+const Model = new LoginModel() as LoginModelType; 
 const Service = new LoginService(Model);
 const Controller = new LoginController(Service);
 const Middleware = new LoginMiddleware();
@@ -15,6 +15,11 @@ LoginRouter.post(
   '/login',
   Middleware.validateLogin,
   Controller.login,
+);
+LoginRouter.post(
+  '/register',
+  Middleware.validateLogin,
+  Controller.register,
 );
 LoginRouter.get('/login/validate', Controller.loginValidate);
 

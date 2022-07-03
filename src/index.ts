@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import routes from './routes';
-import gerenicError from './middlewares/handleGenericsErrors';
+import genericError from './middlewares/handleGenericsErrors';
+import helmet from 'helmet';
 
 class App {
   public app: express.Express;
@@ -22,10 +23,11 @@ class App {
     };
 
     this.app.use(accessControl);
+    this.app.use(helmet())
     this.app.use(cors());
     this.app.use(express.json());
     this.app.use(routes);
-    this.app.use(new gerenicError().handleError);
+    this.app.use(new genericError().handleError);
 
   }
 

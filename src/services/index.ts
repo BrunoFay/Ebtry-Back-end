@@ -1,7 +1,7 @@
 export interface Service<T> {
-  route: string
   create(payload: T): Promise<void>
   getAll(): Promise<T[]>
+  getById(id: string): Promise<T>
   update(id: string, payload: Partial<T>): Promise<void>;
   delete(id: string): Promise<void>;
 }
