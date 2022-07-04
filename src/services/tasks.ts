@@ -1,15 +1,12 @@
-import { string } from "joi";
 import { Service } from ".";
 import { Model } from "../models";
 import { Task } from "../types/tasks";
 
-
-class TasksService implements Service<Task> {
-  model: Model<Task>;
+class TasksService implements Service<Task>  {
+  private model: Model<Task>;
   constructor(Model: Model<Task>) {
     this.model = Model;
   }
-
   async getAll() {
     return await this.model.getAll()
   }
@@ -19,6 +16,7 @@ class TasksService implements Service<Task> {
   }
 
   async update(id: string, taskToUpdate: Partial<Task>) {
+
     await this.model.update(id, taskToUpdate)
   }
   async getById(id: string) {

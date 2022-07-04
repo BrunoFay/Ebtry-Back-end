@@ -3,8 +3,8 @@ import { ErrorRequestHandler } from 'express';
 class HandleGenericsErrors {
   handleError: ErrorRequestHandler = (err, req, res, next) => {
     console.log(err.message);
-
-    res.status(500).json({ message: 'Internal server error' });
+    if (err.message) return res.status(400).json({ message: err.message });
+    return res.status(500).json({ message: 'Internal server error' });
   }
 }
 export default HandleGenericsErrors;

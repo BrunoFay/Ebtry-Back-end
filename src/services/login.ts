@@ -1,8 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import { JwtPayload } from 'jsonwebtoken';
-import { User } from '../types/login';
-import { LoginInfos, LoginModelType } from '../types/login';
 import { createToken, validateToken } from '../helpers/tokenFunctions';
+import { LoginModelType, User } from '../types/login';
 
 class LoginService {
   loginModel: LoginModelType;
@@ -18,22 +17,24 @@ class LoginService {
   }
 
   async singIn(email: string, password: string) {
-    const loginInfos: LoginInfos = { email };
+    const loginInfos = { email };
     const userResult = await this.getUserByEmail(email);
-    if (!userResult) return { errorStatus: 401, message: 'Incorrect email or password' };
+    if (!userResult) throw new Error('Incorrect email or password');
     const validatePassword = await bcrypt.compare(password, userResult.password!);
-    if (!validatePassword) return { errorStatus: 401, message: 'Incorrect email or password' };
+    if (!validatePassword) throw new Error("Password is incorrect")
     this.createToken(loginInfos);
     return { token: this.token };
   }
 
   async singUp(newUser: User & { role: string }) {
+    const checkIfUserExist = await this.getUserByEmail(newUser.email);
+    if (checkIfUserExist) throw new Error('User already exist');
     const passwordHash = await bcrypt.hash(newUser.password, 1)
     const createdUser = await this.loginModel.create(newUser.email, passwordHash, newUser.role);
-    return createdUser
+    return { ...createdUser, password: undefined }
   }
 
-  createToken(data: LoginInfos) {
+  createToken(data: { email: string }) {
     this.token = createToken(data);
   }
 

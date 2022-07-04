@@ -25,8 +25,20 @@ const tasks = [{
   priority: 'medium',
 },
 ]
+const users = [{
+  email: 'admin@admin.com',
+  password: 'admin',
+  role: 'admin',
+}, {
+  email: 'user@user.com',
+  password: 'user',
+  role: 'user',
+}]
 
 async function main() {
+  for (let index = 0; index < users.length; index++) {
+    await prisma.user.create({ data: users[index] })
+  }
   for (let index = 0; index < tasks.length; index++) {
     await prisma.task.create({ data: tasks[index] })
   }

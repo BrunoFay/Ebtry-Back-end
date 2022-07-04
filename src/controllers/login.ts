@@ -10,11 +10,8 @@ class LoginController {
   login: RequestHandler = async (req, res, next) => {
     try {
       const { email, password } = req.body;
-      const isValidUser = await this.service.singIn(email, password);
-      if (isValidUser.errorStatus) {
-        return res.status(isValidUser.errorStatus).json({ message: isValidUser.message });
-      }
-      return res.status(200).json(isValidUser);
+      const token = await this.service.singIn(email, password);
+      return res.status(200).json(token);
     } catch (error) {
       next(error);
     }

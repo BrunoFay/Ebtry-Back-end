@@ -12,9 +12,7 @@ export type UserTypes = {
   createdAt: Date;
 }
 
-export type LoginInfos = {
-  email: string;
-}
+
 export type LoginServiceType = {
   singIn: (email: string, password: string) => Promise<User | any>;
   singUp: (user: User & { role: string }) => Promise<User | any>;

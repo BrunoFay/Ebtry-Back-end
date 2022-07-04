@@ -25,6 +25,5 @@ matchsRouter.post('/tasks',
   Controller.create,
 );
 matchsRouter.delete('/tasks/:id',
-  MiddlewareToken.tokenValidate,
   Controller.delete);
 export default matchsRouter;

@@ -1,3 +1,4 @@
+
 export interface Service<T> {
   create(payload: T): Promise<void>
   getAll(): Promise<T[]>
@@ -5,3 +6,4 @@ export interface Service<T> {
   update(id: string, payload: Partial<T>): Promise<void>;
   delete(id: string): Promise<void>;
 }
+
