@@ -18,7 +18,7 @@ LoginRouter.post(
 );
 LoginRouter.post(
   '/register',
-  Middleware.validateLogin,
+  Middleware.validateRegister,
   Controller.register,
 );
 LoginRouter.get('/login/validate', Controller.loginValidate);
