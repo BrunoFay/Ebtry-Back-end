@@ -7,7 +7,15 @@ class TaskModel implements Model<Task> {
     return await prisma.task.findMany() as Task[]
   }
   async create(payload: Task) {
-    await prisma.task.create({ data: payload })
+    const newTask = {
+      title: payload.title,
+      description: payload.description,
+      status: payload.status,
+      priority: payload.priority,
+      createdAt: payload.createdAt,
+      createdBy: payload.createdBy,
+    } 
+    await prisma.task.create({ data: newTask })
   }
   async update(id: string, payload: Partial<Task>) {
     await prisma.task.update({ where: { id }, data: { ...payload } })
