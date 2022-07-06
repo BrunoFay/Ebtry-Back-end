@@ -23,7 +23,7 @@ class LoginService {
     const validatePassword = await bcrypt.compare(password, userResult.password!);
     if (!validatePassword) throw new Error('Password is incorrect');
     this.createToken(loginInfos);
-    return { token: this.token };
+    return { token: this.token, role: userResult.role };
   }
 
   async singUp(newUser: User & { role: string }) {

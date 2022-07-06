@@ -39,7 +39,7 @@ class TasksController {
       const { id } = req.params;
       const isValidId = await this.taskService.getById(id);
       if (!isValidId) return res.status(404).json({ error: 'Task not found' });
-      await this.taskService.delete(id);
+      await this.taskService.remove(id);
       return res.status(200).json({ message: 'Finished' });
     } catch (error) {
       next(error);

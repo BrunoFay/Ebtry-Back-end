@@ -24,8 +24,8 @@ class TasksService implements Service<Task> {
     return this.model.getById(id);
   }
 
-  async delete(id: string) {
-    await this.model.delete(id);
+  async remove(id: string) {
+    await this.model.remove(id);
   }
 }
 export default TasksService;
