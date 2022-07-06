@@ -15,8 +15,8 @@ class TasksController {
 
   create: RequestHandler = async (req, res, next) => {
     try {
-      const newMatch = await this.taskService.create(req.body);
-      return res.status(201).json(newMatch);
+      const newTask = await this.taskService.create(req.body);
+      return res.status(201).json(newTask);
     } catch (error) {
       next(error);
     }

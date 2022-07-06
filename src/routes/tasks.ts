@@ -10,24 +10,24 @@ import { Task } from '../types/tasks';
 const ModelT = new TasksModel() as Model<Task>;
 const Service = new TasksService(ModelT);
 const Controller = new TasksController(Service);
-const matchsRouter = Router();
+const tasksRouter = Router();
 const MiddlewareToken = new TokenValidate();
 const Middlewaretasks = new TasksValidate();
-matchsRouter.get('/tasks', Controller.getAll);
-matchsRouter.patch(
+tasksRouter.get('/tasks', Controller.getAll);
+tasksRouter.patch(
   '/tasks/:id',
   MiddlewareToken.tokenValidate,
   Middlewaretasks.fieldUpdateValidate,
   Controller.update,
 );
-matchsRouter.post(
+tasksRouter.post(
   '/tasks',
   MiddlewareToken.tokenValidate,
   Middlewaretasks.fieldCreateValidate,
   Controller.create,
 );
-matchsRouter.delete(
+tasksRouter.delete(
   '/tasks/:id',
   Controller.delete,
 );
-export default matchsRouter;
+export default tasksRouter;

@@ -10,7 +10,7 @@ class TasksValidate {
       .valid('toDo', 'inProgress', 'done', 'review', 'tests', 'paused').required(),
     members: Joi.array(),
     createdBy: Joi.string(),
-    createdAt: Joi.date().required(),
+    createdAt: Joi.date(),
   });
 
   protected updateTaskSchema = Joi.object({

@@ -14,7 +14,7 @@ class TaskModel implements Model<Task> {
       createdAt: payload.createdAt,
       createdBy: payload.createdBy,
     };
-    await prisma.task.create({ data: newTask });
+    return prisma.task.create({ data: newTask });
   };
 
   update = async (id: string, payload: Partial<Task>) => {

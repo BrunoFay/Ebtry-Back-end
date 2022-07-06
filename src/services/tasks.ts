@@ -13,7 +13,7 @@ class TasksService implements Service<Task> {
   }
 
   async create(match: Task) {
-    await this.model.create(match);
+    return this.model.create(match);
   }
 
   async update(id: string, taskToUpdate: Partial<Task>) {
