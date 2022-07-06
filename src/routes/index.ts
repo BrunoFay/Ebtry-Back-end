@@ -6,4 +6,4 @@ const routes = Router();
 
 routes.use(loginRoutes);
 routes.use(tasksRoutes);
-export default routes
+export default routes;

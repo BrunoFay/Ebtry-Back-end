@@ -11,5 +11,5 @@ export default class TokenValidates {
     } catch (error) {
       next(error);
     }
-  }
+  };
 }

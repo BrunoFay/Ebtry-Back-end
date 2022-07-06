@@ -3,19 +3,19 @@ import * as chai from 'chai';
 import * as sinon from 'sinon';
 
 import { Response } from 'superagent';
+import { afterEach } from 'mocha';
+import assert from 'assert';
 import { app } from '../index';
 import { mockUser, validUser } from './mocks/user';
 import { prisma } from '../models/db/prismaClient';
 import { Task } from '../types/tasks';
 import { mockTasks } from './mocks/tasks';
-import { afterEach } from 'mocha';
-import assert from 'assert';
 import TaskModel from '../models/tasks';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
-const modelTask = new TaskModel()
+const modelTask = new TaskModel();
 describe('Testes matchs', () => {
   let chaiHttpResponse: Response;
 
@@ -31,14 +31,11 @@ describe('Testes matchs', () => {
     });
 
     it('verifica getAll matches', async () => {
-
       chaiHttpResponse = await chai.request(app).get('/tasks');
       expect(chaiHttpResponse.body).to.deep.be.equal(mockTasks);
       expect(chaiHttpResponse.status).to.be.equal(200);
     });
   });
-
-
 
   /* describe('verifica rota Post Match', () => {
     before(async () => {
@@ -73,4 +70,4 @@ describe('Testes matchs', () => {
         expect(chaiHttpResponse.status).to.have.equal(201);
     });
   }) */
-})
+});

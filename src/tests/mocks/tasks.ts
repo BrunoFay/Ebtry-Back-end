@@ -1,4 +1,4 @@
-export const mockTasks=[{
+export const mockTasks = [{
   title: 'teste',
   description: ' teste1',
   status: 'toDo',
@@ -11,4 +11,4 @@ export const mockTasks=[{
   status: 'inProgress',
   createdBy: 'teste',
   priority: 'high',
-},]
+}];

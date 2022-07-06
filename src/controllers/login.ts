@@ -30,6 +30,7 @@ class LoginController {
       next(error);
     }
   };
+
   register: RequestHandler = async (req, res, next) => {
     try {
       const newUser = await this.service.singUp(req.body);

@@ -3,7 +3,7 @@ import { Service } from '../services';
 import { Task } from '../types/tasks';
 
 class TasksController {
-  constructor(private taskService: Service<Task> = taskService) { }
+  constructor(private taskService: Service<Task>) { }
   getAll: RequestHandler = async (req, res, next) => {
     try {
       const tasks = await this.taskService.getAll();

@@ -1,13 +1,13 @@
-import { RequestHandler } from "express";
-import Joi from "joi";
-
+import { RequestHandler } from 'express';
+import Joi from 'joi';
 
 class TasksValidate {
   protected productSchema = Joi.object({
     title: Joi.string().min(3).required(),
     description: Joi.string(),
     priority: Joi.string().valid('low', 'medium', 'high').required(),
-    status: Joi.string().valid('toDo', 'inProgress', 'done', 'review', 'tests', 'paused').required(),
+    status: Joi.string()
+      .valid('toDo', 'inProgress', 'done', 'review', 'tests', 'paused').required(),
     members: Joi.array(),
     createdBy: Joi.string(),
     createdAt: Joi.date().required(),

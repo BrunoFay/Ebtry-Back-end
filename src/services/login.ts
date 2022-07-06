@@ -5,7 +5,7 @@ import { LoginModelType, User } from '../types/login';
 
 class LoginService {
   loginModel: LoginModelType;
-  private token: string = '';
+  private token = '';
   private isTokenValid: string | JwtPayload = '';
   constructor(loginModel: LoginModelType) {
     this.loginModel = loginModel;
@@ -21,7 +21,7 @@ class LoginService {
     const userResult = await this.getUserByEmail(email);
     if (!userResult) throw new Error('Incorrect email or password');
     const validatePassword = await bcrypt.compare(password, userResult.password!);
-    if (!validatePassword) throw new Error("Password is incorrect")
+    if (!validatePassword) throw new Error('Password is incorrect');
     this.createToken(loginInfos);
     return { token: this.token };
   }
@@ -29,9 +29,9 @@ class LoginService {
   async singUp(newUser: User & { role: string }) {
     const checkIfUserExist = await this.getUserByEmail(newUser.email);
     if (checkIfUserExist) throw new Error('User already exist');
-    const passwordHash = await bcrypt.hash(newUser.password, 1)
+    const passwordHash = await bcrypt.hash(newUser.password, 1);
     const createdUser = await this.loginModel.create(newUser.email, passwordHash, newUser.role);
-    return { ...createdUser, password: undefined }
+    return { ...createdUser, password: undefined };
   }
 
   createToken(data: { email: string }) {
@@ -42,6 +42,5 @@ class LoginService {
     this.isTokenValid = validateToken(token);
     return this.isTokenValid;
   }
-
 }
 export default LoginService;

@@ -1,17 +1,16 @@
-import { JwtPayload } from "jsonwebtoken";
+import { JwtPayload } from 'jsonwebtoken';
 
 export type User = {
   email: string;
   password: string;
-}
+};
 
 export type UserTypes = {
   id: string;
   email: string;
   password: string;
   createdAt: Date;
-}
-
+};
 
 export type LoginServiceType = {
   singIn: (email: string, password: string) => Promise<User | any>;
@@ -22,4 +21,4 @@ export type LoginServiceType = {
 export type LoginModelType = {
   getUserByEmail: (options: any) => Promise<User>;
   create: (email: string, password: string, role: string) => Promise<User | any>
-}
+};

@@ -1,4 +1,3 @@
-
 export type Task = {
   id: string;
   title: string;
@@ -7,5 +6,4 @@ export type Task = {
   status: 'toDo' | 'inProgress' | 'done' | 'review' | 'tests' | 'paused';
   createdBy: string;
   priority: 'low' | 'medium' | 'high';
-}
-
+};

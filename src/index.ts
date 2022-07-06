@@ -1,17 +1,15 @@
 import express from 'express';
 import cors from 'cors';
-import routes from './routes';
-import genericError from './middlewares/handleGenericsErrors';
 import helmet from 'helmet';
+import routes from './routes';
+import GenericError from './middlewares/handleGenericsErrors';
 
 class App {
   public app: express.Express;
 
-
   constructor() {
     this.app = express();
     this.config();
-
   }
 
   private config(): void {
@@ -23,12 +21,11 @@ class App {
     };
 
     this.app.use(accessControl);
-    this.app.use(helmet())
+    this.app.use(helmet());
     this.app.use(cors());
     this.app.use(express.json());
     this.app.use(routes);
-    this.app.use(new genericError().handleError);
-
+    this.app.use(new GenericError().handleError);
   }
 
   public start(PORT: string | number): void {
