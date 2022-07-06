@@ -17,13 +17,13 @@ matchsRouter.get('/tasks', Controller.getAll);
 matchsRouter.patch(
   '/tasks/:id',
   MiddlewareToken.tokenValidate,
-  Middlewaretasks.fieldValidate,
+  Middlewaretasks.fieldUpdateValidate,
   Controller.update,
 );
 matchsRouter.post(
   '/tasks',
   MiddlewareToken.tokenValidate,
-  Middlewaretasks.fieldValidate,
+  Middlewaretasks.fieldCreateValidate,
   Controller.create,
 );
 matchsRouter.delete(
