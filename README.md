@@ -51,7 +51,7 @@ Project carried out during career Blitz week at **[Trybe](https://www.betrybe.co
 The application's Back-end was created following the OOP concepts and some of the SOLID concepts.
 
 ## Technologies used:
-- PrismA
+- Prisma
 - NodeJs
 - Typescript
 - MySQL
