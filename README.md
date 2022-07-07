@@ -75,7 +75,7 @@ cd ebtry-Backend
 
 ##### Install dependencies:
 ```bash
-npm me
+npm i
 ```
 
 ##### Run the Backend manually:
