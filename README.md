@@ -45,6 +45,7 @@ https://github.com/BrunoFay/Ebtry-Front-end
 
 <br/>
 <hr/>
+
 # Ebtry Backend [*ENGLISH*]
 Project carried out during career Blitz week at **[Trybe](https://www.betrybe.com/)**.
 <br/>
