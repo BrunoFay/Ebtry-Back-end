@@ -4,28 +4,28 @@ import { Response } from 'superagent';
 import sinon from 'sinon';
 import { afterEach, beforeEach } from 'mocha';
 import { app } from '../index';
-
+import prisma from '../models/db/prismaClient'
 // @ts-ignore
 import LoginModel from '../models/users';
-import { invalidUser, mockUser, validUser } from './mocks/user';
+import { invalidUser, mockUser, validUser,mocknewUser,newUser } from './mocks/user';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 const loginModel = new LoginModel();
 
-describe('/login ', () => {
+describe.only('/login ', () => {
   let chaiHttpResponse: Response;
-  beforeEach(async () => {
+  beforeEach(() => {
     sinon
-      .stub(loginModel, 'getUserByEmail')
+      .stub(prisma.user, 'findFirst')
       .resolves(
         mockUser as any,
       );
   });
 
   afterEach(() => {
-    (loginModel.getUserByEmail as sinon.SinonStub).restore();
+    (prisma.user.findFirst as sinon.SinonStub).restore();
   });
 
   it('checks to send a correct login, returns an object and status 200', async () => {
@@ -33,6 +33,8 @@ describe('/login ', () => {
       .request(app)
       .post('/login')
       .send(validUser);
+      console.log(chaiHttpResponse.body);
+      
     expect(chaiHttpResponse.body).to.be.an('object');
     expect(chaiHttpResponse.body).to.have.all.keys('token');
     expect(chaiHttpResponse).to.have.status(200);
@@ -78,8 +80,7 @@ describe('/login ', () => {
     expect(chaiHttpResponse).to.have.status(400);
   });
 });
-
-/* describe('/register ', () => {
+/*  describe('/register ', () => {
   before(async () => {
     sinon.stub(prisma.user, "create")
       .resolves(mocknewUser as any);
@@ -101,4 +102,5 @@ describe('/login ', () => {
     expect(chaiHttpResponse).to.have.status(201);
   });
 
-})  */
+})  
+ */

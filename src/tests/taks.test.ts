@@ -7,7 +7,7 @@ import { afterEach } from 'mocha';
 import assert from 'assert';
 import { app } from '../index';
 import { mockUser, validUser } from './mocks/user';
-import { prisma } from '../models/db/prismaClient';
+import  prisma  from '../models/db/prismaClient';
 import { Task } from '../types/tasks';
 import { mockTasks } from './mocks/tasks';
 import TaskModel from '../models/tasks';
